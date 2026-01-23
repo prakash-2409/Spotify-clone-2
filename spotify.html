@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="spotify.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <div class="logo"><i class="fa-brands fa-spotify"></i></div>
+            <div class="home"><i class="fa-solid fa-house"></i></div>
+            <div class="search-bar">
+                <div class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                <input type="text" class="input-box" placeholder="What do you want to play?">
+                <div class="browse-icon"><i class="fa-solid fa-bars"></i></div>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#">Premium</a>
+                <a href="#">Support</a>
+                <a href="#">Download</a>
+            </div>
+            <div class="divider"></div>
+            <div class="nav-actions">
+                <div class="install"><i class="fa-solid fa-circle-arrow-down"></i> Install App</div>
+                <div class="sign-up">Sign Up</div>
+                <button class="login-button">Log in</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="library-header">
+                <span><i class="fa-solid fa-lines-staggered"></i> Your Library</span>
+                <div class="library-icons">
+                    <i class="fa-solid fa-plus"></i>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn">Playlists</button>
+                <button class="filter-btn">Artists</button>
+                <button class="filter-btn">Albums</button>
+            </div>
+            <div class="create-playlist">
+                <h4>Create your first playlist</h4>
+                <p>It's easy, we'll help you</p>
+                <button class="create-btn">Create playlist</button>
+            </div>
+            <div class="browse-podcasts">
+                <h4>Let's find some podcasts to follow</h4>
+                <p>We'll keep you updated on new episodes</p>
+                <button class="create-btn">Browse podcasts</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <section class="greeting">
+                <h1>Good afternoon</h1>
+                <div class="quick-picks">
+                    <div class="quick-card"><img src="images/liked-songs.jpg" alt="Liked Songs"><span>Liked Songs</span></div>
+                    <div class="quick-card"><img src="images/daily-mix-1.jpg" alt="Daily Mix 1"><span>Daily Mix 1</span></div>
+                    <div class="quick-card"><img src="images/chill-hits.jpg" alt="Chill Hits"><span>Chill Hits</span></div>
+                    <div class="quick-card"><img src="images/top-hits.jpg" alt="Top Hits"><span>Top Hits</span></div>
+                    <div class="quick-card"><img src="images/pop-mix.jpg" alt="Pop Mix"><span>Pop Mix</span></div>
+                    <div class="quick-card"><img src="images/rock-classics.jpg" alt="Rock Classics"><span>Rock Classics</span></div>
+                </div>
+            </section>
+
+            <section class="playlist-section">
+                <h2>Made For You</h2>
+                <div class="playlist-grid">
+                    <div class="playlist-card">
+                        <img src="images/daily-mix-1.jpg" alt="Daily Mix 1">
+                        <h4>Daily Mix 1</h4>
+                        <p>Arijit Singh, Pritam, Vishal-Shekhar</p>
+                        <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                    <div class="playlist-card">
+                        <img src="images/discover-weekly.jpg" alt="Discover Weekly">
+                        <h4>Discover Weekly</h4>
+                        <p>Your weekly mixtape</p>
+                        <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                    <div class="playlist-card">
+                        <img src="images/release-radar.jpg" alt="Release Radar">
+                        <h4>Release Radar</h4>
+                        <p>Catch all the latest music</p>
+                        <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                    <div class="playlist-card">
+                        <img src="images/top-hits.jpg" alt="Daily Mix 2">
+                        <h4>Daily Mix 2</h4>
+                        <p>Ed Sheeran, The Weeknd, Dua Lipa</p>
+                        <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                    <div class="playlist-card">
+                        <img src="images/chill-vibes.jpg" alt="Chill Vibes">
+                        <h4>Chill Vibes</h4>
+                        <p>Relax and unwind</p>
+                        <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="playlist-section">
+                <h2>Popular Artists</h2>
+                <div class="playlist-grid">
+                    <div class="playlist-card artist-card">
+                        <img src="images/arijit-singh.jpg" alt="Arijit Singh">
+                        <h4>Arijit Singh</h4>
+                        <p>Artist</p>
+                        <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                    <div class="playlist-card artist-card">
+                        <img src="images/ed-sheeran.jpg" alt="Ed Sheeran">
+                        <h4>Ed Sheeran</h4>
+                        <p>Artist</p>
+                        <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                    <div class="playlist-card artist-card">
+                        <img src="images/the-weeknd.jpg" alt="The Weeknd">
+                        <h4>The Weeknd</h4>
+                        <p>Artist</p>
+                        <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                    <div class="playlist-card artist-card">
+                        <img src="images/dua-lipa.jpg" alt="Dua Lipa">
+                        <h4>Dua Lipa</h4>
+                        <p>Artist</p>
+                        <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                    <div class="playlist-card artist-card">
+                        <img src="images/pritam.jpg" alt="Pritam">
+                        <h4>Pritam</h4>
+                        <p>Artist</p>
+                        <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Player Bar -->
+    <footer class="player-bar">
+        <div class="song-info">
+            <img src="images/song-thumbnail.jpg" alt="Now Playing">
+            <div class="song-details">
+                <span class="song-name">Tum Hi Ho</span>
+                <span class="artist-name">Arijit Singh</span>
+            </div>
+            <i class="fa-regular fa-heart"></i>
+        </div>
+        <div class="player-controls">
+            <div class="control-buttons">
+                <i class="fa-solid fa-shuffle"></i>
+                <i class="fa-solid fa-backward-step"></i>
+                <button class="play-pause"><i class="fa-solid fa-play"></i></button>
+                <i class="fa-solid fa-forward-step"></i>
+                <i class="fa-solid fa-repeat"></i>
+            </div>
+            <div class="progress-bar">
+                <span>1:23</span>
+                <div class="progress-track">
+                    <div class="progress-fill"></div>
+                </div>
+                <span>4:22</span>
+            </div>
+        </div>
+        <div class="extra-controls">
+            <i class="fa-solid fa-list"></i>
+            <i class="fa-solid fa-computer"></i>
+            <div class="volume-control">
+                <i class="fa-solid fa-volume-high"></i>
+                <div class="volume-bar">
+                    <div class="volume-fill"></div>
+                </div>
+            </div>
+            <i class="fa-solid fa-expand"></i>
+        </div>
+    </footer>
+    
+    <script src="spotify.js"></script>
+</body>
+</html>
+
+
+
+
