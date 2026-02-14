@@ -1,5 +1,11 @@
-//  1. PLAY/PAUSE BUTTON
-// When you click play button, it changes to pause icon
+// ============================================
+//  SPOTIFY CLONE - INTERACTIVE FEATURES
+//  Author: Prakash
+//  Updated: Added volume slider, shuffle/repeat, search filter
+// ============================================
+
+
+// 1. PLAY/PAUSE BUTTON
 let playBtn = document.querySelector('.play-pause');
 let isPlaying = false;
 
@@ -7,37 +13,35 @@ playBtn.onclick = function() {
     let icon = playBtn.querySelector('i');
     
     if (isPlaying == false) {
-        icon.className = 'fa-solid fa-pause';  // change to pause
+        icon.className = 'fa-solid fa-pause';
         isPlaying = true;
     } else {
-        icon.className = 'fa-solid fa-play';   // change to play
+        icon.className = 'fa-solid fa-play';
         isPlaying = false;
     }
 };
 
 
-// 2. LIKE BUTTON (HEART) 
-// Click heart to like/unlike
+// 2. LIKE BUTTON (HEART)
 let heart = document.querySelector('.song-info .fa-heart');
 let liked = false;
 
 heart.onclick = function() {
     if (liked == false) {
-        heart.className = 'fa-solid fa-heart';  // filled heart
-        heart.style.color = '#1DB954';          // green color
+        heart.className = 'fa-solid fa-heart';
+        heart.style.color = '#1DB954';
         liked = true;
     } else {
-        heart.className = 'fa-regular fa-heart'; // outline heart
-        heart.style.color = '#b3b3b3';           // grey color
+        heart.className = 'fa-regular fa-heart';
+        heart.style.color = '#b3b3b3';
         liked = false;
     }
 };
 
 
-// 3. GREETING BASED ON TIME 
-// Shows "Good morning/afternoon/evening"
+// 3. GREETING BASED ON TIME
 let greeting = document.querySelector('.greeting h1');
-let hours = new Date().getHours();  // gets current hour (0-23)
+let hours = new Date().getHours();
 
 if (hours < 12) {
     greeting.innerText = 'Good morning';
@@ -48,37 +52,150 @@ if (hours < 12) {
 }
 
 
-// 4. CLICK CARD TO SHOW SONG NAME 
-// When you click any playlist card, it shows in player bar
-let cards = document.querySelectorAll('.playlist-card');
+// 4. UPDATE PLAYER BAR ON SONG CLICK
+let playButtons = document.querySelectorAll('.play-btn');
 let songName = document.querySelector('.song-name');
 let artistName = document.querySelector('.artist-name');
+let songImg = document.querySelector('.song-info img');
 
-for (let i = 0; i < cards.length; i++) {
-    cards[i].onclick = function() {
-        let title = cards[i].querySelector('h4').innerText;
-        let artist = cards[i].querySelector('p').innerText;
-        
-        songName.innerText = title;
-        artistName.innerText = artist;
-    };
-}
+playButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const card = btn.parentElement;
+        songName.innerText = card.getAttribute('data-song');
+        artistName.innerText = card.getAttribute('data-artist');
+        songImg.src = card.getAttribute('data-img');
+    });
+});
 
 
-// 5. VOLUME MUTE/UNMUTE 
-// Click volume icon to mute
-let volumeIcon = document.querySelector('.volume-control i');
+// ============================================
+// NEW FEATURE: DRAGGABLE VOLUME SLIDER
+// Click anywhere on volume bar to set volume
+// ============================================
+let volumeBar = document.querySelector('.volume-bar');
 let volumeFill = document.querySelector('.volume-fill');
-let muted = false;
+let volumeIcon = document.querySelector('.volume-control i');
+let currentVolume = 70;
 
-volumeIcon.onclick = function() {
-    if (muted == false) {
-        volumeIcon.className = 'fa-solid fa-volume-xmark';  // mute icon
-        volumeFill.style.width = '0%';
-        muted = true;
-    } else {
-        volumeIcon.className = 'fa-solid fa-volume-high';   // sound icon
-        volumeFill.style.width = '70%';
-        muted = false;
+// Click on volume bar to change volume
+volumeBar.onclick = function(e) {
+    let barWidth = volumeBar.offsetWidth;
+    let clickPosition = e.offsetX;
+    let newVolume = (clickPosition / barWidth) * 100;
+    
+    setVolume(newVolume);
+};
+
+// Drag to change volume
+let isDragging = false;
+
+volumeBar.onmousedown = function() {
+    isDragging = true;
+};
+
+document.onmousemove = function(e) {
+    if (isDragging) {
+        let rect = volumeBar.getBoundingClientRect();
+        let newVolume = ((e.clientX - rect.left) / rect.width) * 100;
+        
+        // Keep volume between 0 and 100
+        newVolume = Math.max(0, Math.min(100, newVolume));
+        setVolume(newVolume);
     }
 };
+
+document.onmouseup = function() {
+    isDragging = false;
+};
+
+// Function to update volume display and icon
+function setVolume(volume) {
+    currentVolume = volume;
+    volumeFill.style.width = volume + '%';
+    
+    // Change icon based on volume level
+    if (volume == 0) {
+        volumeIcon.className = 'fa-solid fa-volume-xmark';
+    } else if (volume < 50) {
+        volumeIcon.className = 'fa-solid fa-volume-low';
+    } else {
+        volumeIcon.className = 'fa-solid fa-volume-high';
+    }
+}
+
+// Click icon to mute/unmute
+let savedVolume = 70;
+
+volumeIcon.onclick = function() {
+    if (currentVolume > 0) {
+        savedVolume = currentVolume;
+        setVolume(0);
+    } else {
+        setVolume(savedVolume);
+    }
+};
+
+
+// ============================================
+// NEW FEATURE: SHUFFLE & REPEAT TOGGLE
+// Click to activate with green highlight
+// ============================================
+let shuffleBtn = document.querySelector('.fa-shuffle');
+let repeatBtn = document.querySelector('.fa-repeat');
+
+let shuffleActive = false;
+let repeatActive = false;
+
+shuffleBtn.onclick = function() {
+    shuffleActive = !shuffleActive;
+    
+    if (shuffleActive) {
+        shuffleBtn.classList.add('active');
+    } else {
+        shuffleBtn.classList.remove('active');
+    }
+};
+
+repeatBtn.onclick = function() {
+    repeatActive = !repeatActive;
+    
+    if (repeatActive) {
+        repeatBtn.classList.add('active');
+    } else {
+        repeatBtn.classList.remove('active');
+    }
+};
+
+
+// ============================================
+// NEW FEATURE: SEARCH FILTER
+// Type to filter playlists in real-time
+// ============================================
+let searchInput = document.querySelector('.input-box');
+let allCards = document.querySelectorAll('.playlist-card');
+
+searchInput.oninput = function() {
+    let searchText = searchInput.value.toLowerCase();
+    
+    allCards.forEach(card => {
+        let songTitle = card.getAttribute('data-song').toLowerCase();
+        let artistName = card.getAttribute('data-artist').toLowerCase();
+        
+        // Check if search text matches song or artist
+        if (songTitle.includes(searchText) || artistName.includes(searchText)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+};
+
+// Clear search - show all cards when search is empty
+searchInput.addEventListener('search', function() {
+    if (searchInput.value === '') {
+        allCards.forEach(card => {
+            card.style.display = 'block';
+        });
+    }
+});
+

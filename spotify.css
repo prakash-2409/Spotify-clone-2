@@ -66,10 +66,23 @@ nav {
     padding: 0 1rem;
     transition: all 0.2s;
 }
+/* Add this to your spotify.css */
+.input-box:focus {
+    outline: none;
+}
+.search-bar:focus-within {
+    border: 2px solid white;
+    background-color: rgb(60, 60, 60);
+}
 
 .search-bar:hover {
     background-color: rgb(55, 55, 55);
     border: 1px solid rgb(80, 80, 80);
+}
+
+/* Search typing indicator */
+.search-bar:has(.input-box:not(:placeholder-shown)) {
+    border: 2px solid #1DB954;
 }
 
 .search-icon {
@@ -348,7 +361,7 @@ nav {
     padding: 1rem;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, opacity 0.3s, transform 0.3s;
     position: relative;
 }
 
@@ -579,6 +592,41 @@ nav {
 
 .volume-bar:hover .volume-fill {
     background-color: #1DB954;
+}
+
+/* ============ NEW: SHUFFLE/REPEAT ACTIVE STATE ============ */
+.control-buttons .active {
+    color: #1DB954 !important;
+}
+
+.control-buttons .active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: #1DB954;
+    border-radius: 50%;
+}
+
+.control-buttons i {
+    position: relative;
+}
+
+/* ============ NEW: IMPROVED VOLUME SLIDER ============ */
+.volume-bar {
+    position: relative;
+    cursor: pointer;
+}
+
+.volume-fill {
+    transition: width 0.1s ease;
+}
+
+.volume-bar:hover {
+    height: 6px;
 }
 
 /* ============ SCROLLBAR ============ */
