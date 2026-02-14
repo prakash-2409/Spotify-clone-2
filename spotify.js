@@ -1,17 +1,9 @@
-// ============================================
-//  SPOTIFY CLONE - INTERACTIVE FEATURES
-//  Author: Prakash
-//  Updated: Added volume slider, shuffle/repeat, search filter
-// ============================================
-
-
-// 1. PLAY/PAUSE BUTTON
+// play/pause button toggle
 let playBtn = document.querySelector('.play-pause');
 let isPlaying = false;
 
 playBtn.onclick = function() {
     let icon = playBtn.querySelector('i');
-    
     if (isPlaying == false) {
         icon.className = 'fa-solid fa-pause';
         isPlaying = true;
@@ -19,10 +11,10 @@ playBtn.onclick = function() {
         icon.className = 'fa-solid fa-play';
         isPlaying = false;
     }
-};
+}; 
 
 
-// 2. LIKE BUTTON (HEART)
+// heart button - like/unlike
 let heart = document.querySelector('.song-info .fa-heart');
 let liked = false;
 
@@ -39,7 +31,7 @@ heart.onclick = function() {
 };
 
 
-// 3. GREETING BASED ON TIME
+// greeting changes based on time
 let greeting = document.querySelector('.greeting h1');
 let hours = new Date().getHours();
 
@@ -52,7 +44,7 @@ if (hours < 12) {
 }
 
 
-// 4. UPDATE PLAYER BAR ON SONG CLICK
+// when u click play btn on card, it shows in player bar
 let playButtons = document.querySelectorAll('.play-btn');
 let songName = document.querySelector('.song-name');
 let artistName = document.querySelector('.artist-name');
@@ -68,25 +60,22 @@ playButtons.forEach(btn => {
 });
 
 
-// ============================================
-// NEW FEATURE: DRAGGABLE VOLUME SLIDER
-// Click anywhere on volume bar to set volume
-// ============================================
+// --- volume slider (drag + click) ---
+
 let volumeBar = document.querySelector('.volume-bar');
 let volumeFill = document.querySelector('.volume-fill');
 let volumeIcon = document.querySelector('.volume-control i');
 let currentVolume = 70;
 
-// Click on volume bar to change volume
+// click anywhere on bar to set volume
 volumeBar.onclick = function(e) {
     let barWidth = volumeBar.offsetWidth;
     let clickPosition = e.offsetX;
     let newVolume = (clickPosition / barWidth) * 100;
-    
     setVolume(newVolume);
 };
 
-// Drag to change volume
+// drag stuff
 let isDragging = false;
 
 volumeBar.onmousedown = function() {
@@ -97,8 +86,7 @@ document.onmousemove = function(e) {
     if (isDragging) {
         let rect = volumeBar.getBoundingClientRect();
         let newVolume = ((e.clientX - rect.left) / rect.width) * 100;
-        
-        // Keep volume between 0 and 100
+        // keep it between 0-100
         newVolume = Math.max(0, Math.min(100, newVolume));
         setVolume(newVolume);
     }
@@ -108,12 +96,11 @@ document.onmouseup = function() {
     isDragging = false;
 };
 
-// Function to update volume display and icon
+// this updates the bar and icon
 function setVolume(volume) {
     currentVolume = volume;
     volumeFill.style.width = volume + '%';
     
-    // Change icon based on volume level
     if (volume == 0) {
         volumeIcon.className = 'fa-solid fa-volume-xmark';
     } else if (volume < 50) {
@@ -123,7 +110,7 @@ function setVolume(volume) {
     }
 }
 
-// Click icon to mute/unmute
+// click icon to mute/unmute
 let savedVolume = 70;
 
 volumeIcon.onclick = function() {
@@ -136,19 +123,15 @@ volumeIcon.onclick = function() {
 };
 
 
-// ============================================
-// NEW FEATURE: SHUFFLE & REPEAT TOGGLE
-// Click to activate with green highlight
-// ============================================
+// --- shuffle and repeat buttons ---
+
 let shuffleBtn = document.querySelector('.fa-shuffle');
 let repeatBtn = document.querySelector('.fa-repeat');
-
 let shuffleActive = false;
 let repeatActive = false;
 
 shuffleBtn.onclick = function() {
     shuffleActive = !shuffleActive;
-    
     if (shuffleActive) {
         shuffleBtn.classList.add('active');
     } else {
@@ -158,7 +141,6 @@ shuffleBtn.onclick = function() {
 
 repeatBtn.onclick = function() {
     repeatActive = !repeatActive;
-    
     if (repeatActive) {
         repeatBtn.classList.add('active');
     } else {
@@ -167,10 +149,8 @@ repeatBtn.onclick = function() {
 };
 
 
-// ============================================
-// NEW FEATURE: SEARCH FILTER
-// Type to filter playlists in real-time
-// ============================================
+// --- search filter ---
+
 let searchInput = document.querySelector('.input-box');
 let allCards = document.querySelectorAll('.playlist-card');
 
@@ -179,10 +159,10 @@ searchInput.oninput = function() {
     
     allCards.forEach(card => {
         let songTitle = card.getAttribute('data-song').toLowerCase();
-        let artistName = card.getAttribute('data-artist').toLowerCase();
+        let artist = card.getAttribute('data-artist').toLowerCase();
         
-        // Check if search text matches song or artist
-        if (songTitle.includes(searchText) || artistName.includes(searchText)) {
+        // show card if it matches search
+        if (songTitle.includes(searchText) || artist.includes(searchText)) {
             card.style.display = 'block';
         } else {
             card.style.display = 'none';
@@ -190,7 +170,7 @@ searchInput.oninput = function() {
     });
 };
 
-// Clear search - show all cards when search is empty
+// shows all cards when search cleared
 searchInput.addEventListener('search', function() {
     if (searchInput.value === '') {
         allCards.forEach(card => {
